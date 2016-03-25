@@ -23,4 +23,10 @@ var _ = Describe("Tracer", func() {
 		tracer.Trace("Hello world")
 		Eventually(buffer).Should(gbytes.Say("Hello world"))
 	})
+
+	It("should not return any output when the tracer is turned off", func() {
+		var silentTracer Tracer = Off()
+		silentTracer.Trace("this message should not appear")
+		Eventually(buffer).ShouldNot(gbytes.Say("this message should not appear"))
+	})
 })
